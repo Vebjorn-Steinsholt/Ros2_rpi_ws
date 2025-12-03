@@ -1,0 +1,8 @@
+# Ignore ROS2 build artifacts
+build/
+install/
+log/
+
+# Ignore colcon metadata
+.colcon/
+
