@@ -25,6 +25,7 @@ setup(
     entry_points={
         'console_scripts': [
             "temperature_sensor = rpi_tests.temperature_sensor:main",
+            "create_folder_server = rpi_tests.create_folder_server:main",
         ],
     },
 )

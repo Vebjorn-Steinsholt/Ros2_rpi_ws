@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="rpi_tests" exec="create_folder_server"/>
+    <node pkg="rpi_tests" exec="temperature_sensor"/>
+</launch>
