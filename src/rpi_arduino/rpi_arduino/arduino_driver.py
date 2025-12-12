@@ -3,6 +3,7 @@ import time
 import serial
 import rclpy
 from rclpy.node import Node
+from example_interfaces.msg import Int64
 
 
 class ArduinoDriverNode(Node): 
@@ -10,9 +11,10 @@ class ArduinoDriverNode(Node):
         super().__init__('arduino_driver')
         self.ser_ = ser
         self.led_on_ = False
+        self.temperature_publisher_ = self.create_publisher(Int64, 'arduino_temperature', 10)
         self.blink_led_timer_ = self.create_timer(1.0, self.blink_led)
         self.read_serial_timer_ = self.create_timer(0.01, self.read_serial)
-        self.
+        
         self.get_logger().info("Arduino Driver Node has been started.")
 
     def blink_led(self):
@@ -22,7 +24,18 @@ class ArduinoDriverNode(Node):
 
     def read_serial(self):
         if self.ser_.in_waiting > 0:
-            msg = self.ser_.readline().decode('utf-8').rstrip()
+            data = self.ser_.readline().decode('utf-8').rstrip()
+            # Accept only numeric payloads; skip status lines like "OK:" or "ERR:".
+            if data and not data.startswith("OK:") and not data.startswith("ERR:"):
+                try:
+                    value = int(data)
+                except ValueError:
+                    # Non-numeric line; ignore it quietly.
+                    return
+                msg = Int64()
+                msg.data = value
+                self.temperature_publisher_.publish(msg)
+
 
 def main(args=None):
     # Init Serial Communication
