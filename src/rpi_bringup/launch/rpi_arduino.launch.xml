@@ -1,0 +1,11 @@
+<launch>
+    <node pkg="joy" exec="joy_node">
+       <param from="$(find-pkg-share rpi_bringup)/config/rpi_arduino_config.yaml" />
+    </node>
+
+    <node pkg="rpi_tests" exec="temperature_sensor"/>
+
+    <node pkg="rpi_arduino" exec="servo_control">
+          <param from="$(find-pkg-share rpi_bringup)/config/rpi_arduino_config.yaml" />
+    </node>
+</launch>

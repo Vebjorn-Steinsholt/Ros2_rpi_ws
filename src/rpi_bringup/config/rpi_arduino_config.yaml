@@ -1,0 +1,9 @@
+  /joy_node:
+    ros__parameters:
+      autorepeat_rate: 0.0
+      coalesce_interval_ms: 200
+
+  /servo_control:
+    ros__parameters:
+      control_method: "automatic_sweep" # Options: "joystick", "rpi_temperature", "automatic_sweep"
+      
