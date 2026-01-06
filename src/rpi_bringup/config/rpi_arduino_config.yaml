@@ -5,5 +5,5 @@
 
   /servo_control:
     ros__parameters:
-      control_method: "automatic_sweep" # Options: "joystick", "rpi_temperature", "automatic_sweep"
+      control_method: "joystick" # Options: "joystick", "rpi_temperature", "automatic_sweep"
       

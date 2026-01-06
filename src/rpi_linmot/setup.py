@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+            'linmot_controller = rpi_linmot.linmot_controller:main',
         ],
     },
 )

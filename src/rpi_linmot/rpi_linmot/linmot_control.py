@@ -33,11 +33,11 @@ class LinmotControlNode(Node):
         if self.control_method_ == "joystick":
             self.joy_sub_ = self.create_subscription(Joy, 'joy', self.joy_callback, 10)
         elif self.control_method_ == "automatic_sweep":
-            self.servo_sweep_timer_ = self.create_timer(0.01, self.servo_sweep)
+            self.auto_sweep_timer_ = self.create_timer(0.01, self.auto_sweep)
         elif self.control_method_ == "sinusoidal_sweep":
             self.sinusoidal_sweep_timer_ = self.create_timer(0.01, self.sinusoidal_sweep)
 
-    def servo_sweep(self):
+    def auto_sweep(self):
         cmd = "servo:" + str(self.index_) + "\n"
         self.ser_.write(cmd.encode('utf-8'))
         if(self.going_up_):
